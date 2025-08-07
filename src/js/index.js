@@ -169,8 +169,8 @@ const titles = {
 // Panel IDs in current grafana.aq.sensors.africa PM DATA dashboard are as follows:
 // PM2.5 = 2, PM 10 = 1, PM 1 =3
 const panelIDs = {
-  PM10: [1, 2], // if PM10 is selected, show panels in this order: PM10, PM2.5
-  PM25: [2, 1], // if PM10 is selected, show panels in this order: PM2.5, PM10
+  PM10: [1, 2, 3], // if PM10 is selected, show panels in this order: PM10, PM2.5, PM1
+  PM25: [2, 1, 3], // if PM2.5 is selected, show panels in this order: PM2.5, PM10, PM1
   Temperature: [4, 3],
   Humidity: [6, 5],
   Pressure: [8, 7],
@@ -933,6 +933,11 @@ function displayGraph(id) {
           (panelIDs[user_selected_value][1] > 0
             ? panel_str
                 .replace("<PANELID>", panelIDs[user_selected_value][1])
+                .replace("<SENSOR>", sens)
+            : "") +
+          (panelIDs[user_selected_value][2] > 0
+            ? panel_str
+                .replace("<PANELID>", panelIDs[user_selected_value][2])
                 .replace("<SENSOR>", sens)
             : "")
       );
